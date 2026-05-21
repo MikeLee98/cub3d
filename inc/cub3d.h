@@ -5,11 +5,19 @@
 # include "libft.h"
 # include <math.h>
 # include <fcntl.h>
+# include <stdbool.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <unistd.h>
 
 // Window
 # define WIN_W		1280
 # define WIN_H		720
 # define WIN_TITLE	"cub3D"
+# define TILE		128
 
 // Map characters
 # define WALL		'1'
@@ -18,6 +26,11 @@
 # define PLAYER_S	'S'
 # define PLAYER_E	'E'
 # define PLAYER_W	'W'
+
+//Keyboard Keys
+# define ESC		65307
+# define LEFT_ARR	65361
+# define RIGHT_ARR	65363
 
 // Movement
 # define MOVE_SPEED	0.05
@@ -34,7 +47,7 @@ typedef struct s_img
 	int		line_len;
 	int		endian;
 	int		width;
-	int		height
+	int		height;
 }	t_img;
 
 // esta estrutura e para tratar das texturas e cores
@@ -62,6 +75,27 @@ typedef struct s_player
 	double		plane_x;
 	double		plane_y;
 }	t_player;
+
+typedef struct s_ray
+{
+	double	camera_x;
+	double	dir_x;
+	double	dir_y;
+	int		map_x;
+	int		map_y;
+	int		step_x;
+	int		step_y;
+	double	sidedist_x;
+	double	sidedist_y;
+	double	deltadist_x;
+	double	deltadist_y;
+	double	wall_dist;
+	double	wall_x;
+	int		side;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
+}	t_ray;
 
 // esta estrutura trata do mapa
 typedef struct s_map
