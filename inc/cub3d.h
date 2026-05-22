@@ -58,7 +58,9 @@ typedef struct s_textures
 	t_img		we;
 	t_img		ea;
 	int			floor[3];
-	int			ceiling[3];
+	int 		ceiling[3];
+	char		*f;
+	char		*c;
 	char		*no;
 	char		*so;
 	char		*we;
@@ -100,10 +102,11 @@ typedef struct s_ray
 // esta estrutura trata do mapa
 typedef struct s_map
 {
-	char		**map;
+	char		**lines;
 	char		**grid;
 	int			width;
 	int			height;
+	int			start_index;
 }	t_map;
 
 // master struct, conseguimos aceder a todas as outras a partir desta
@@ -117,7 +120,23 @@ typedef struct s_game
 	t_map		map;
 }	t_game;
 
-// parsing funcs
+// PARSING
+
+// helper.c
 void    *ft_realloc(void *ptr, size_t old_size, size_t new_size);
+char	*skip_spaces(char *str);
+
+// check_extension.c
+int check_file(char *path);
+int check_extension(char *path);
+
+// read_file.c
+char **read_lines(int fd);
+int read_file(t_game *game, char *path);
+
+// parse_elements.c
+int check_colors(t_game *game, char *trimmed);
+int parse_element(t_game *game, char *line);
+int parse_elements(t_game *game);
 
 #endif
