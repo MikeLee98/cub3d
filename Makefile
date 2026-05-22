@@ -9,7 +9,8 @@ MLX_DIR = ./mlx
 MLX = $(MLX_DIR)/libmlx.a
 MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 
-SRC = $(SRCDIR)/main.c
+SRC = $(SRCDIR)/main.c \
+	  $(SRCDIR)/helper.c
 
 OBJ = $(SRC:.c=.o)
 INC = -I$(INCDIR) -I$(LIBFTDIR) -I$(MLX_DIR)
