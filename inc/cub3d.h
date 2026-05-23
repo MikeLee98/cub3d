@@ -1,7 +1,7 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "mlx.h"
+// # include "mlx.h"
 # include "libft.h"
 # include <math.h>
 # include <fcntl.h>
@@ -57,14 +57,14 @@ typedef struct s_textures
 	t_img		so;
 	t_img		we;
 	t_img		ea;
-	int			floor[3];
-	int 		ceiling[3];
-	char		*f;
-	char		*c;
-	char		*no;
-	char		*so;
-	char		*we;
-	char		*ea;
+	int			f[3];
+	int 		c[3];
+	char		*str_f;
+	char		*str_c;
+	char		*path_no;
+	char		*path_so;
+	char		*path_we;
+	char		*path_ea;
 }	t_textures;
 
 // esta estrutura trata da posiçao e orientaçao do jogador
@@ -138,5 +138,8 @@ int read_file(t_game *game, char *path);
 int check_colors(t_game *game, char *trimmed);
 int parse_element(t_game *game, char *line);
 int parse_elements(t_game *game);
+
+// validation.c
+int validate_values(t_game game);
 
 #endif

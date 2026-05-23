@@ -1,27 +1,33 @@
 #include "../../inc/cub3d.h"
 
-int validate_values(game)
+static int	set_value(char **field, char *str)
 {
-	
+    if (*field)
+        return (1);
+    *field = ft_strdup(str);
+    return (!*field);
 }
 
 int parse_element(t_game *game, char *str)
 {
-	if (!ft_strncmp(str, "NO ", 3))
-		game->textures.no = ft_strdup(str + 3);
-	else if (!ft_strncmp(str, "SO ", 3))
-		game->textures.so = ft_strdup(str + 3);
-	else if (!ft_strncmp(str, "WE ", 3))
-		game->textures.we = ft_strdup(str + 3);
-	else if (!ft_strncmp(str, "EA ", 3))
-		game->textures.ea = ft_strdup(str + 3);
-	else if (!ft_strncmp(str, "F ", 2))
-		game->textures.f = ft_strdup(str + 2);
-	else if (!ft_strncmp(str, "C ", 2))
-		game->textures.c = ft_strdup(str + 2);
-	else
-		return (free(str), 1);
-	return (0);
+    int ret;
+
+	ret = 0;
+    if (!ft_strncmp(str, "NO ", 3))
+        ret = set_value(&game->textures.path_no, str + 3);
+    else if (!ft_strncmp(str, "SO ", 3))
+        ret = set_value(&game->textures.path_so, str + 3);
+    else if (!ft_strncmp(str, "WE ", 3))
+        ret = set_value(&game->textures.path_we, str + 3);
+    else if (!ft_strncmp(str, "EA ", 3))
+        ret = set_value(&game->textures.path_ea, str + 3);
+    else if (!ft_strncmp(str, "F ", 2))
+        ret = set_value(&game->textures.str_f, str + 2);
+    else if (!ft_strncmp(str, "C ", 2))
+        ret = set_value(&game->textures.str_c, str + 2);
+    else
+        ret = 1;
+    return (free(str), ret);
 }
 
 int	parse_elements(t_game *game)
