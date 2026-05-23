@@ -140,6 +140,9 @@ int parse_element(t_game *game, char *line);
 int parse_elements(t_game *game);
 
 // validation.c
-int validate_values(t_game game);
+int validate_values(t_game *game);
+
+// parse_map.c
+
 
 #endif
