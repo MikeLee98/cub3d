@@ -1,6 +1,6 @@
 #include "../../inc/cub3d.h"
 
-char **read_lines(int fd)
+char **read_lines(t_map *map, int fd)
 {
     char **lines = NULL;
     char *line;
@@ -13,19 +13,20 @@ char **read_lines(int fd)
         lines[count + 1] = NULL;
         count++;
     }
+	map->height = count;
     return (lines);
 }
 
-int read_file(t_game *game, char *path)
+int read_file(t_map *map, char *path)
 {
 	int fd;
 
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 		return (error("cannot open file"));
-	game->map.map = read_lines(fd);
+	map->lines = read_lines(map, fd);
 	close(fd);
-	if (!game->map.map)
+	if (!map->lines)
 		return (error("failed to read file"));
 	return (0);
 }

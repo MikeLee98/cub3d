@@ -131,8 +131,8 @@ int check_file(char *path);
 int check_extension(char *path);
 
 // read_file.c
-char **read_lines(int fd);
-int read_file(t_game *game, char *path);
+char **read_lines(t_map *map, int fd);
+int read_file(t_map *map, char *path);
 
 // parse_elements.c
 int check_colors(t_game *game, char *trimmed);
@@ -143,6 +143,6 @@ int parse_elements(t_game *game);
 int validate_values(t_game *game);
 
 // parse_map.c
-
+int parse_map(t_map *map);
 
 #endif
