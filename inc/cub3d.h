@@ -148,6 +148,6 @@ int validate_values(t_game *game);
 int parse_map(t_map *map);
 
 // validate_map.c
-int validate_characters(t_map *map);
+int validate_map(t_map *map);
 
 #endif
