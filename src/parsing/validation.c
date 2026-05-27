@@ -13,6 +13,7 @@ int	validate_color(char *str, int color[3])
 		i++;
 	if (i != 3)
 		return (free_split(split), error("color not RGB format"), 1);
+	i = 0;
 	while (i < 3)
 	{
 		color[i] = ft_atoi(split[i]);

@@ -107,6 +107,8 @@ typedef struct s_map
 	int			width;
 	int			height;
 	int			start_index;
+	int			player_x;
+	int			player_y;
 }	t_map;
 
 // master struct, conseguimos aceder a todas as outras a partir desta
@@ -144,5 +146,8 @@ int validate_values(t_game *game);
 
 // parse_map.c
 int parse_map(t_map *map);
+
+// validate_map.c
+int validate_characters(t_map *map);
 
 #endif

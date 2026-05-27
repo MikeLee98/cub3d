@@ -12,5 +12,6 @@ int main(int argc, char **argv)
 	ft_memset(&game, 0, sizeof(t_game));
 	if (parse(&game, argv[1]))
         return (1);
+	printf("map is valid! congratulations David you are gay!\n");
 	return (0);
 }
