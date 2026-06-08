@@ -38,3 +38,13 @@ char **copy_grid(t_map *map)
     }
     return (copy);
 }
+
+void free_split(char **split)
+{
+    int i;
+
+    i = 0;
+    while (split[i])
+        free(split[i++]);
+    free(split);
+}

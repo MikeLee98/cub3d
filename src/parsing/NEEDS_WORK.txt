@@ -1,0 +1,1 @@
+you need to implement a way to measure the width of the map until a \n and not just a \0

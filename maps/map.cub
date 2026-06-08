@@ -1,0 +1,12 @@
+NO ./textures/no_texture.txt
+SO ./textures/so_texture.txt
+WE ./textures/we_texture.txt
+EA ./textures/ea_texture.txt
+
+F 255,255,255
+C 0,0,0
+
+1111
+1001
+1N01
+1111

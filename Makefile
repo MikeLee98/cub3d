@@ -1,7 +1,7 @@
 NAME = cub3d
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-SRCDIR = src
+SRCDIR = src/parsing
 INCDIR = inc
 LIBFTDIR = libft
 LIBFT = $(LIBFTDIR)/libft.a
@@ -10,7 +10,14 @@ MLX = $(MLX_DIR)/libmlx.a
 MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 
 SRC = $(SRCDIR)/main.c \
-	  $(SRCDIR)/helper.c
+	  $(SRCDIR)/helper.c \
+	  $(SRCDIR)/parsing.c \
+	  $(SRCDIR)/check_file.c \
+	  $(SRCDIR)/read_file.c \
+	  $(SRCDIR)/parse_elements.c \
+	  $(SRCDIR)/validation.c \
+	  $(SRCDIR)/parse_map.c \
+	  $(SRCDIR)/validate_map.c \
 
 OBJ = $(SRC:.c=.o)
 INC = -I$(INCDIR) -I$(LIBFTDIR) -I$(MLX_DIR)

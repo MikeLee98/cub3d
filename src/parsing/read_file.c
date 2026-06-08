@@ -6,8 +6,10 @@ char **read_lines(t_map *map, int fd)
     char *line;
     int count = 0;
 
-    while ((line = get_next_line(fd)) != NULL)
+    while ((line = ft_get_next_line(fd)) != NULL)
     {
+		if ((line[ft_strlen(line) - 1] == '\n'))
+            line[ft_strlen(line) - 1] = '\0';
         lines = ft_realloc(lines, sizeof(char *) * count, sizeof(char *) * (count + 2));
         lines[count] = line;
         lines[count + 1] = NULL;

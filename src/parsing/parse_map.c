@@ -14,7 +14,7 @@ int parse_map(t_map *map)
 		return (1);
 	while (map->lines[i])
 	{
-		if (j < ft_strlen(map->lines[i]))
+		if (j < (int)ft_strlen(map->lines[i]))
 			j = ft_strlen(map->lines[i]);
 		i++;
 	}

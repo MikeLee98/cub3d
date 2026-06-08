@@ -55,8 +55,8 @@ int validate_map(t_map *map)
     char    **copy;
     int     validation;
 
-    if (validate_characters(map))
-        return (1);
+	if (validate_characters(map))
+		return (1);
 	copy = copy_grid(map);
 	if (!copy)
 		return (1);

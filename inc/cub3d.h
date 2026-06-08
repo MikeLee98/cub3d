@@ -124,9 +124,14 @@ typedef struct s_game
 
 // PARSING
 
+// parsing.c
+int parse(t_game *game, char *path);
+
 // helper.c
 void    *ft_realloc(void *ptr, size_t old_size, size_t new_size);
-char	*skip_spaces(char *str);
+int error(char *message);
+char **copy_grid(t_map *map);
+void free_split(char **split);
 
 // check_extension.c
 int check_file(char *path);
