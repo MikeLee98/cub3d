@@ -1,22 +1,29 @@
 #include "../../inc/cub3d.h"
 
-int flood_fill(char **grid, int y, int x, int height, int width)
+int validate_walls(t_map *map)
 {
-    if (y < 0 || y >= height || x < 0 || x >= width)
-        return (error("map is not closed"), 1);
-    if (grid[y][x] == ' ')
-        return (error("map is not closed"), 1);
-    if (grid[y][x] == '1' || grid[y][x] == 'V')
-        return (0);
-    grid[y][x] = 'V';
-    if (flood_fill(grid, y + 1, x, height, width))
-        return (1);
-    if (flood_fill(grid, y - 1, x, height, width))
-        return (1);
-    if (flood_fill(grid, y, x + 1, height, width))
-        return (1);
-    if (flood_fill(grid, y, x - 1, height, width))
-        return (1);
+    int i;
+    int j;
+
+    i = 0;
+    while (i < map->height)
+    {
+        j = 0;
+        while (j < map->width)
+        {
+            if (ft_strchr("0NSEW", map->grid[i][j]))
+            {
+                if (i == 0 || i == map->height - 1
+                    || j == 0 || j == map->width - 1)
+                    return (error("map is not closed"), 1);
+                if (map->grid[i - 1][j] == ' ' || map->grid[i + 1][j] == ' '
+                    || map->grid[i][j - 1] == ' ' || map->grid[i][j + 1] == ' ')
+                    return (error("map is not closed"), 1);
+            }
+            j++;
+        }
+        i++;
+    }
     return (0);
 }
 
@@ -52,14 +59,9 @@ int validate_characters(t_map *map)
 
 int validate_map(t_map *map)
 {
-    char    **copy;
-    int     validation;
-
-	if (validate_characters(map))
-		return (1);
-	copy = copy_grid(map);
-	if (!copy)
-		return (1);
-	validation = flood_fill(copy, map->player_y, map->player_x, map->height, map->width);
-    return (validation);
+    if (validate_characters(map))
+        return (1);
+    if (validate_walls(map))
+        return (1);
+    return (0);
 }

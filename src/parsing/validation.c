@@ -27,13 +27,17 @@ int	validate_color(char *str, int color[3])
 
 int	validate_path(char *path)
 {
-	int fd;
+    size_t  len;
+    int     fd;
 
-	fd = open(path, O_RDONLY);
-	if (fd < 0)
-		return (error("texture file not found"), 1);
-	close(fd);
-	return (0);
+    len = ft_strlen(path);
+    if (len <= 4 || ft_strncmp(path + len - 4, ".xpm", 4) != 0)
+        return (error("texture must be a .xpm file"), 1);
+    fd = open(path, O_RDONLY);
+    if (fd < 0)
+        return (error("texture file not found"), 1);
+    close(fd);
+    return (0);
 }
 
 int validate_values(t_game *game)

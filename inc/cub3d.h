@@ -59,6 +59,8 @@ typedef struct s_textures
 	t_img		ea;
 	int			f[3];
 	int 		c[3];
+	int     	floor_color;
+	int     	ceiling_color;
 	char		*str_f;
 	char		*str_c;
 	char		*path_no;
