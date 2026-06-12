@@ -130,7 +130,7 @@ typedef struct s_game
 int parse(t_game *game, char *path);
 
 // helper.c
-void    *ft_realloc(void *ptr, size_t old_size, size_t new_size);
+void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);
 int error(char *message);
 char **copy_grid(t_map *map);
 void free_split(char **split);

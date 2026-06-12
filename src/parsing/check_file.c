@@ -13,7 +13,7 @@ int check_file(char *path)
 
 int check_extension(char *path)
 {
-	size_t	len;
+    size_t	len;
 
 	len = ft_strlen(path);
 	if (len <= 4 || ft_strncmp(path + len - 4, ".cub", 4) != 0)

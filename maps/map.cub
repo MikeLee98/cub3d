@@ -1,13 +1,13 @@
-NO ./textures/no_texture.txt
-SO ./textures/so_texture.txt
-WE ./textures/we_texture.txt
-EA ./textures/ea_texture.txt
+NO ./textures/no_texture.xpm
+SO ./textures/so_texture.xpm
+WE ./textures/we_texture.xpm
+EA ./textures/ea_texture.xpm
 
 F 255,255,255
 C 0,0,0
 
-    1
-   101 1
-  10001N1
- 1000001
-111111111
+    1       1111
+   10111    1001
+  1000001   1001
+ 10000N1    1001
+111111111   1111
