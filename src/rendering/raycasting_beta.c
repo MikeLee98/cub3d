@@ -7,8 +7,19 @@ void draw_line(t_game *game, int x0, int y0, int x1, int y1, int color)
     int dx = abs(x1 - x0);
     int dy = abs(y1 - y0);
 
-    int sx = (x0 < x1) ? 1 : -1;
-    int sy = (y0 < y1) ? 1 : -1;
+    int sx;
+    int sy;
+
+    if (x0 < x1)
+        sx = 1;
+    else
+        sx = -1;
+
+    if (y0 < y1)
+        sy = 1;
+    else
+        sy = -1;
+
 
     int err = dx - dy;
 

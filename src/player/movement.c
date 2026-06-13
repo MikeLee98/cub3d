@@ -63,28 +63,16 @@ void strafe_right(t_game *game)
         game->player.y = new_y;
 }
 
-void rotate_left(t_game *game) //math sucks
+void rotate(t_game *game, double angle)
 {
     double old_dir_x = game->player.dir_x;
     double old_plane_x = game->player.plane_x;
 
-    game->player.dir_x = game->player.dir_x * cos(-ROT_SPEED) - game->player.dir_y * sin(-ROT_SPEED);
-    game->player.dir_y = old_dir_x * sin(-ROT_SPEED) + game->player.dir_y * cos(-ROT_SPEED);
+    game->player.dir_x = game->player.dir_x * cos(angle) - game->player.dir_y * sin(angle);
+    game->player.dir_y = old_dir_x * sin(angle) + game->player.dir_y * cos(angle);
 
-    game->player.plane_x = game->player.plane_x * cos(-ROT_SPEED) - game->player.plane_y * sin(-ROT_SPEED);
-    game->player.plane_y = old_plane_x * sin(-ROT_SPEED) + game->player.plane_y * cos(-ROT_SPEED);
-}
-
-void rotate_right(t_game *game)
-{
-    double old_dir_x = game->player.dir_x;
-    double old_plane_x = game->player.plane_x;
-
-    game->player.dir_x = game->player.dir_x * cos(ROT_SPEED) - game->player.dir_y * sin(ROT_SPEED);
-    game->player.dir_y = old_dir_x * sin(ROT_SPEED) + game->player.dir_y * cos(ROT_SPEED);
-
-    game->player.plane_x = game->player.plane_x * cos(ROT_SPEED) - game->player.plane_y * sin(ROT_SPEED);
-    game->player.plane_y = old_plane_x * sin(ROT_SPEED) + game->player.plane_y * cos(ROT_SPEED);
+    game->player.plane_x = game->player.plane_x * cos(angle) - game->player.plane_y * sin(angle);
+    game->player.plane_y = old_plane_x * sin(angle) + game->player.plane_y * cos(angle);
 }
 
 int key_press(int keycode, t_game *game)
@@ -101,9 +89,9 @@ int key_press(int keycode, t_game *game)
     if (keycode == 'd')
         strafe_right(game);
     if (keycode == LEFT_ARR) 
-        rotate_left(game);
+        rotate(game, -ROT_SPEED);
     if (keycode == RIGHT_ARR) 
-        rotate_right(game);
+        rotate(game, ROT_SPEED);
 
     return (0);
 }
