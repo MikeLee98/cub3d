@@ -134,6 +134,8 @@ void init_player(t_player *player);
 
 
 
+
+
 //First render test
 void my_mlx_pixel_put(t_img *img, int x, int y, int color);
 int render_loop(t_game *game);
@@ -182,6 +184,13 @@ int validate_map(t_map *map);
 int load_textures(t_game *game);
 void render_3d(t_game *g);
 void find_player(t_game *game);
+
+void init_ray_delta(t_game *game, t_ray *ray, int x);
+void init_ray_step(t_game *game, t_ray *ray);
+
+void dda_loop(t_game *game, t_ray *ray);
+void	set_perp_dist(t_ray *ray);
+void dda(t_game *game, t_ray *ray);
 
 
 

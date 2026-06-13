@@ -152,7 +152,7 @@ int get_texture_pixel(t_img *texture, int x, int y)
     return (*(unsigned int *)pixel);
 }
 
-static void init_ray(t_game *game, t_ray *ray, int x)
+/* static void init_ray(t_game *game, t_ray *ray, int x)
 {
     
     float camera_x;
@@ -196,9 +196,9 @@ static void init_ray(t_game *game, t_ray *ray, int x)
         ray->step_y = 1;
         ray->side_dist_y = (ray->map_y + 1.0 - game->player.y) * ray->delta_dist_y;
     }
-}
+} */
 
-void perform_dda(t_game *game, t_ray *ray)
+/* void perform_dda(t_game *game, t_ray *ray)
 {
     int hit = 0;
 
@@ -241,7 +241,7 @@ void perform_dda(t_game *game, t_ray *ray)
 
     if (ray->perp_dist < 0.001)
         ray->perp_dist = 0.001;
-}
+} */
 
 static void draw_column(t_game *game, t_ray *ray, int x)
 {
@@ -314,8 +314,9 @@ void render_3d(t_game *game)
     while (x < WIN_W)
     {
         //printf("perp_dist = %f\n", ray.perp_dist);
-        init_ray(game, &ray, x);
-        perform_dda(game, &ray);
+        init_ray_delta(game, &ray, x);
+        init_ray_step(game, &ray);
+        dda_loop(game, &ray);
         draw_column(game, &ray, x);
         x++;
     }

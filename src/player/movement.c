@@ -7,7 +7,7 @@ int is_wall(t_game *game, double x, double y)
     if (x >= (int)strlen(game->map.grid[(int)y]))
         return 1;
 
-    if (game->map.grid[(int)y][(int)x] != '0' && game->map.grid[(int)y][(int)x] != 'N' && game->map.grid[(int)y][(int)x] != 'S' && game->map.grid[(int)y][(int)x] != 'E' && game->map.grid[(int)y][(int)x] != 'W')
+    if (game->map.grid[(int)y][(int)x] == '1')
         return 1;
 
     return 0;
