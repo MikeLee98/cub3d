@@ -227,16 +227,14 @@ void perform_dda(t_game *game, t_ray *ray)
             ray->side = 1;
         }
 
-        if (ray->map_x < 0 || ray->map_y < 0 ||
-            ray->map_y >= game->map.height ||
-            ray->map_x >= game->map.width)
+        if (ray->map_x < 0 || ray->map_y < 0 || ray->map_y >= game->map.height || ray->map_x >= game->map.width)
             return;
 
         if (game->map.grid[ray->map_y][ray->map_x] == '1')
             hit = 1;
     }
 
-    if (ray->side == 0)
+    if (ray->side == 0) //avoids fucked angle
         ray->perp_dist = ray->side_dist_x - ray->delta_dist_x;
     else
         ray->perp_dist = ray->side_dist_y - ray->delta_dist_y;
@@ -245,7 +243,7 @@ void perform_dda(t_game *game, t_ray *ray)
         ray->perp_dist = 0.001;
 }
 
-static void draw_column(t_game *game, t_ray *r, int x)
+static void draw_column(t_game *game, t_ray *ray, int x)
 {
     int line_height;
     int draw_start;
@@ -258,7 +256,7 @@ static void draw_column(t_game *game, t_ray *r, int x)
     int color;
     t_img *tex;
 
-    line_height = (int)(WIN_H / r->perp_dist);
+    line_height = (int)(WIN_H / ray->perp_dist);
 
     draw_start = -line_height / 2 + WIN_H / 2;
     draw_end = line_height / 2 + WIN_H / 2;
@@ -268,19 +266,19 @@ static void draw_column(t_game *game, t_ray *r, int x)
     if (draw_end >= WIN_H)
         draw_end = WIN_H - 1;
 
-    tex = get_wall_texture(game, r);
+    tex = get_wall_texture(game, ray);
 
     float wall_x;
-    if (r->side == 0)
-        wall_x = game->player.y + r->perp_dist * r->dir_y;
+    if (ray->side == 0)
+        wall_x = game->player.y + ray->perp_dist * ray->dir_y;
     else
-        wall_x = game->player.x + r->perp_dist * r->dir_x;
+        wall_x = game->player.x + ray->perp_dist * ray->dir_x;
 
     wall_x -= floor(wall_x);
 
     tex_x = (int)(wall_x * tex->width);
 
-    if ((r->side == 0 && r->dir_x > 0) || (r->side == 1 && r->dir_y < 0)) tex_x = tex->width - tex_x - 1;
+    if ((ray->side == 0 && ray->dir_x > 0) || (ray->side == 1 && ray->dir_y < 0)) tex_x = tex->width - tex_x - 1;
 
     step = (float)tex->height / line_height;
     tex_pos = (draw_start - WIN_H / 2 + line_height / 2) * step;
