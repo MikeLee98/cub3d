@@ -37,8 +37,7 @@ void init_player(t_player *player)
     player->plane_y = 0;
 }
 
-
-void init_map(t_map *map)
+/*void init_map(t_map *map)
 {
     static char *map1[] = {
     "111111",
@@ -52,10 +51,10 @@ void init_map(t_map *map)
     map->width = 6;
     map->height = 5;
 }
+    */
 
 
-
-int init_data(t_game *game)
+/*int init_data(t_game *game)
 {
     game->mlx = NULL;
     game->win = NULL;
@@ -71,7 +70,7 @@ int init_data(t_game *game)
     init_image(&game->screen);
     init_player(&game->player);
     init_textures(&game->textures);
-    init_map(&game->map);
+    //init_map(&game->map);
     find_player(game);
 
     
@@ -79,3 +78,4 @@ int init_data(t_game *game)
     return (0);
 
 }
+    */

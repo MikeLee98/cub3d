@@ -12,5 +12,6 @@ int parse(t_game *game, char *path)
 		return (1);
 	if (validate_map(&game->map))
 		return (1);
+
 	return (0);
 }

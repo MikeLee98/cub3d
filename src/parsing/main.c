@@ -1,6 +1,6 @@
 #include "../../inc/cub3d.h"
 
-int init_game(t_game *game)
+/*int init_game(t_game *game)
 {
 	game->mlx = mlx_init();
 	if (!game->mlx)
@@ -30,3 +30,4 @@ int main(int argc, char **argv)
 	printf("map is valid\n");
 	return (0);
 }
+*/

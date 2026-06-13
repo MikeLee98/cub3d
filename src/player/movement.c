@@ -1,10 +1,67 @@
-#include "cub3d.h"
+#include  "cub3d.h"
 
 int is_wall(t_game *game, double x, double y)
 {
-    if (game->map.grid[(int)y][(int)x] == '1')
-        return (1);
-    return (0);
+    if (y < 0 || x < 0 || y >= game->map.height)
+        return 1;
+    if (x >= (int)strlen(game->map.grid[(int)y]))
+        return 1;
+
+    if (game->map.grid[(int)y][(int)x] != '0' && game->map.grid[(int)y][(int)x] != 'N' && game->map.grid[(int)y][(int)x] != 'S' && game->map.grid[(int)y][(int)x] != 'E' && game->map.grid[(int)y][(int)x] != 'W')
+        return 1;
+
+    return 0;
+}
+
+void find_player(t_game *game)
+{
+    int x;
+    int y;
+
+    y = 0;
+    while (y < game->map.height)
+    {
+        x = 0;
+        while (x < game->map.width)
+        {
+            char c = game->map.grid[y][x];
+
+            if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+            {
+                game->player.x = x + 0.5;
+                game->player.y = y + 0.5;
+                game->player.dir_x = 0;
+                game->player.dir_y = 0;
+                game->player.plane_x = 0;
+                game->player.plane_y = 0;
+
+                if (c == 'N')
+                {
+                    game->player.dir_y = -1;
+                    game->player.plane_x = 0.66;
+                }
+                else if (c == 'S')
+                {
+                    game->player.dir_y = 1;
+                    game->player.plane_x = -0.66;
+                }
+                else if (c == 'E')
+                {
+                    game->player.dir_x = 1;
+                    game->player.plane_y = 0.66;
+                }
+                else if (c == 'W')
+                {
+                    game->player.dir_x = -1;
+                    game->player.plane_y = -0.66;
+                }
+                game->map.grid[y][x] = '0';
+                return;
+            }
+            x++;
+        }
+        y++;
+    }
 }
 
 void move_forward(t_game *game)
@@ -79,7 +136,6 @@ int key_press(int keycode, t_game *game)
 {
     if (keycode == ESC) 
         exit(0);
-
     if (keycode == 'w')
         move_forward(game);
     if (keycode == 's')

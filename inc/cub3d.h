@@ -89,10 +89,11 @@ typedef struct s_ray
 	int		map_y;
 	int		step_x;
 	int		step_y;
-	double	sidedist_x;
-	double	sidedist_y;
-	double	deltadist_x;
-	double	deltadist_y;
+	double 	perp_dist;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
 	double	wall_dist;
 	double	wall_x;
 	int		side;
@@ -129,6 +130,7 @@ typedef struct s_game
 //Data init
 int init_data(t_game *game);
 void init_image(t_img *screen);
+void init_player(t_player *player);
 
 
 
@@ -174,6 +176,13 @@ int parse_map(t_map *map);
 
 // validate_map.c
 int validate_map(t_map *map);
+
+
+//testing
+int load_textures(t_game *game);
+void render_3d(t_game *g);
+void find_player(t_game *game);
+
 
 
 #endif

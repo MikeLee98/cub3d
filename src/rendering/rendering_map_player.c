@@ -1,12 +1,11 @@
-#include "cub3d.h"
-
-
+/* #include "cub3d.h"
 
 
 
 void my_mlx_pixel_put(t_img *img, int x, int y, int color)
 {
     char *dst;
+
 
     dst = img->addr + (y * img->line_len + x * (img->bpp / 8));
     *(unsigned int *)dst = color;
@@ -82,7 +81,6 @@ void find_player(t_game *game) //temporary
 }
 
 
-
 void draw_player(t_game *game)
 {
     int i;
@@ -129,4 +127,4 @@ int render_loop(t_game *game)
     mlx_destroy_image(game->mlx, game->screen.img);
 
     return (0);
-}
+} */

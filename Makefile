@@ -12,8 +12,8 @@ MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 SRC = $(SRCDIR)/main.c \
 		$(SRCDIR)/init/init_data.c \
 		$(SRCDIR)/rendering/rendering_map_player.c $(SRCDIR)/rendering/raycasting_beta.c \
-		$(SRCDIR)/player/movement.c
-
+		$(SRCDIR)/execution/init_textures.c \
+		$(SRCDIR)/player/movement.c \
 		$(SRCDIR)/parsing/main.c \
 	  $(SRCDIR)/parsing/helper.c \
 	  $(SRCDIR)/parsing/parsing.c \
