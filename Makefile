@@ -14,6 +14,16 @@ SRC = $(SRCDIR)/main.c \
 		$(SRCDIR)/rendering/rendering_map_player.c $(SRCDIR)/rendering/raycasting_beta.c \
 		$(SRCDIR)/player/movement.c
 
+		$(SRCDIR)/parsing/main.c \
+	  $(SRCDIR)/parsing/helper.c \
+	  $(SRCDIR)/parsing/parsing.c \
+	  $(SRCDIR)/parsing/check_file.c \
+	  $(SRCDIR)/parsing/read_file.c \
+	  $(SRCDIR)/parsing/parse_elements.c \
+	  $(SRCDIR)/parsing/validation.c \
+	  $(SRCDIR)/parsing/parse_map.c \
+	  $(SRCDIR)/parsing/validate_map.c \
+
 
 
 

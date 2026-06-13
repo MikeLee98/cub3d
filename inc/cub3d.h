@@ -57,8 +57,12 @@ typedef struct s_textures
 	t_img		so;
 	t_img		we;
 	t_img		ea;
-	int		floor_color;
-	int		ceiling_color;
+	int			f[3];
+	int 		c[3];
+	int     	floor_color;
+	int     	ceiling_color;
+	char		*str_f;
+	char		*str_c;
 	char		*path_no;
 	char		*path_so;
 	char		*path_we;
@@ -101,9 +105,13 @@ typedef struct s_ray
 // esta estrutura trata do mapa
 typedef struct s_map
 {
+	char		**lines;
 	char		**grid;
-	int		width;
-	int		height;
+	int			width;
+	int			height;
+	int			start_index;
+	int			player_x;
+	int			player_y;
 }	t_map;
 
 // master struct, conseguimos aceder a todas as outras a partir desta
@@ -133,6 +141,39 @@ int key_press(int keycode, t_game *game);
 
 //raycast tests
 void cast_ray(t_game *game, double camera_x);
+
+// PARSING
+
+// parsing.c
+int parse(t_game *game, char *path);
+
+// helper.c
+void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);
+int error(char *message);
+char **copy_grid(t_map *map);
+void free_split(char **split);
+
+// check_extension.c
+int check_file(char *path);
+int check_extension(char *path);
+
+// read_file.c
+char **read_lines(t_map *map, int fd);
+int read_file(t_map *map, char *path);
+
+// parse_elements.c
+int check_colors(t_game *game, char *trimmed);
+int parse_element(t_game *game, char *line);
+int parse_elements(t_game *game);
+
+// validation.c
+int validate_values(t_game *game);
+
+// parse_map.c
+int parse_map(t_map *map);
+
+// validate_map.c
+int validate_map(t_map *map);
 
 
 #endif
