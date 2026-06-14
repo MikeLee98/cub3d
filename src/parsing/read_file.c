@@ -29,6 +29,6 @@ int read_file(t_map *map, char *path)
 	map->lines = read_lines(map, fd);
 	close(fd);
 	if (!map->lines)
-		return (error("failed to read file"));
+		return (error("failed to read file")); //close fd em todas as situaçoes inc error
 	return (0);
 }

@@ -1,6 +1,5 @@
 #include "cub3d.h"
 
-
 int init_game(t_game *game)
 {
 	game->mlx = mlx_init();
@@ -27,7 +26,6 @@ int loop(t_game *game)
     render_loop(game);
     return (0);
 }
-
 
 
 int main(int argc, char **argv)
