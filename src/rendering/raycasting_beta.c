@@ -1,116 +1,7 @@
 #include "cub3d.h"
 
 /*
-void draw_line(t_game *game, int x0, int y0, int x1, int y1, int color)
-{
-    int dx = abs(x1 - x0);
-    int dy = abs(y1 - y0);
 
-    int sx;
-    int sy;
-
-    if (x0 < x1)
-        sx = 1;
-    else
-        sx = -1;
-
-    if (y0 < y1)
-        sy = 1;
-    else
-        sy = -1;
-
-
-    int err = dx - dy;
-
-    while (1)
-    {
-        my_mlx_pixel_put(&game->screen, x0, y0, color);
-
-        if (x0 == x1 && y0 == y1)
-            break;
-
-        int e2 = 2 * err;
-
-        if (e2 > -dy)
-        {
-            err -= dy;
-            x0 += sx;
-        }
-        if (e2 < dx)
-        {
-            err += dx;
-            y0 += sy;
-        }
-    }
-}
-
-void cast_ray(t_game *game, double camera_x)
-{
-    t_ray ray;
-
-
-    ray.map_x = (int)game->player.x;
-    ray.map_y = (int)game->player.y;
-
-    ray.dir_x = game->player.dir_x + game->player.plane_x * camera_x;
-    ray.dir_y = game->player.dir_y + game->player.plane_y * camera_x;
-
-    ray.deltadist_x = fabs(1 / ray.dir_x);
-    ray.deltadist_y = fabs(1 / ray.dir_y);
-
-    if (ray.dir_x < 0)
-    {
-        ray.step_x = -1;
-        ray.sidedist_x = (game->player.x - ray.map_x) * ray.deltadist_x;
-    }
-    else
-    {
-        ray.step_x = 1;
-        ray.sidedist_x = (ray.map_x + 1.0 - game->player.x) * ray.deltadist_x;
-    }
-
-    if (ray.dir_y < 0)
-    {
-        ray.step_y = -1;
-        ray.sidedist_y = (game->player.y - ray.map_y) * ray.deltadist_y;
-    }
-    else
-    {
-        ray.step_y = 1;
-        ray.sidedist_y = (ray.map_y + 1.0 - game->player.y) * ray.deltadist_y;
-    }
-
-    
-    while (1)
-    {
-        if (ray.sidedist_x < ray.sidedist_y)
-        {
-            ray.sidedist_x += ray.deltadist_x;
-            ray.map_x += ray.step_x;
-            ray.side = 0;
-        }
-        else
-        {
-            ray.sidedist_y += ray.deltadist_y;
-            ray.map_y += ray.step_y;
-            ray.side = 1;
-        }
-
-        if (game->map.grid[ray.map_y][ray.map_x] == '1')
-            break;
-    }
-    double perp_dist;
-
-    if (ray.side == 0)
-        perp_dist = (ray.map_x - game->player.x + (1 - ray.step_x) / 2) / ray.dir_x;
-    else
-        perp_dist = (ray.map_y - game->player.y + (1 - ray.step_y) / 2) / ray.dir_y;
-
-    double hit_x = game->player.x + ray.dir_x * perp_dist;
-    double hit_y = game->player.y + ray.dir_y * perp_dist;
-
-  
-    draw_line(game,(game->player.x )* TILE,(game->player.y)* TILE, hit_x * TILE, hit_y * TILE, 0x00FF00);
 
     
 } */
@@ -135,12 +26,16 @@ t_img *get_wall_texture(t_game *data, t_ray *ray)
     if (ray->side == 0)
     {
         if (ray->step_x > 0)
-            return (&data->textures.we);
-        return (&data->textures.ea);
+            return (&data->textures.ea);
+        return (&data->textures.we);
     }
-    if (ray->step_y > 0)
-        return (&data->textures.so);
-    return (&data->textures.no);
+    if (ray->side == 1)
+    {
+        if (ray->step_y > 0)
+            return (&data->textures.so);
+        return (&data->textures.no);
+    }
+    return (0); //might have to change?
 }
 
 int get_texture_pixel(t_img *texture, int x, int y)
@@ -244,62 +139,28 @@ int get_texture_pixel(t_img *texture, int x, int y)
 
 static void draw_column(t_game *game, t_ray *ray, int x)
 {
-    int line_height;
-    int draw_start;
-    int draw_end;
     int y;
-    float step;
-    float tex_pos;
-    int tex_x;
-    int tex_y;
+    double tex_pos;
     int color;
     t_img *tex;
 
-    line_height = (int)(WIN_H / ray->perp_dist);
-
-    draw_start = -line_height / 2 + WIN_H / 2;
-    draw_end = line_height / 2 + WIN_H / 2;
-
-    if (draw_start < 0)
-        draw_start = 0;
-    if (draw_end >= WIN_H)
-        draw_end = WIN_H - 1;
-
+    draw_line_distance(ray);
     tex = get_wall_texture(game, ray);
-
-    float wall_x;
-    if (ray->side == 0)
-        wall_x = game->player.y + ray->perp_dist * ray->dir_y;
-    else
-        wall_x = game->player.x + ray->perp_dist * ray->dir_x;
-
-    wall_x -= floor(wall_x);
-
-    tex_x = (int)(wall_x * tex->width);
-
-    if ((ray->side == 0 && ray->dir_x > 0) || (ray->side == 1 && ray->dir_y < 0)) tex_x = tex->width - tex_x - 1;
-
-    step = (float)tex->height / line_height;
-    tex_pos = (draw_start - WIN_H / 2 + line_height / 2) * step;
-
+    tex_pos = get_texture_position(game, ray, tex);
     y = 0;
-    while (y < draw_start)
+    while (y < ray->draw_start)
         my_mlx_pixel_put(&game->screen, x, y++, game->textures.ceiling_color);
-
-    while (y <= draw_end)
+    while (y <= ray->draw_end)
     {
-        tex_y = (int)tex_pos;
-        if (tex_y >= tex->height)
-            tex_y = tex->height - 1;
-        if (tex_y < 0)
-            tex_y = 0;
-
-        color = get_texture_pixel(tex, tex_x, tex_y);
+        ray->tex_y = (int)tex_pos; //coordinate texture to integer
+        if (ray->tex_y >= tex->height)
+            ray->tex_y = tex->height - 1; //avoid overflow
+        if (ray->tex_y < 0)
+            ray->tex_y = 0;
+        color = get_texture_pixel(tex, ray->tex_x, ray->tex_y);
         my_mlx_pixel_put(&game->screen, x, y++, color);
-
-        tex_pos += step;
+        tex_pos += ray->step;
     }
-
     while (y < WIN_H)
         my_mlx_pixel_put(&game->screen, x, y++, game->textures.floor_color);
 }
@@ -326,7 +187,7 @@ int render_loop(t_game *game)
     game->screen.img = mlx_new_image(game->mlx, WIN_W, WIN_H);
     game->screen.addr = mlx_get_data_addr(game->screen.img,&game->screen.bpp,&game->screen.line_len, &game->screen.endian);
 
-    render_3d(game);   
+    render_3d(game);
 
     mlx_put_image_to_window(game->mlx, game->win, game->screen.img, 0, 0);
     mlx_destroy_image(game->mlx, game->screen.img);

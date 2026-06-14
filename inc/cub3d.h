@@ -82,21 +82,23 @@ typedef struct s_player
 
 typedef struct s_ray
 {
-	double	camera_x;
-	double	dir_x;
-	double	dir_y;
-	int		map_x;
-	int		map_y;
-	int		step_x;
-	int		step_y;
-	double 	perp_dist;
-	double	side_dist_x;
-	double	side_dist_y;
-	double	delta_dist_x;
-	double	delta_dist_y;
-	double	wall_dist;
-	double	wall_x;
-	int		side;
+	double	camera_x; //X coordinate on the camera plane, between [-1,1], -1 = left, 0 = middle, 1 = right, used to calc the direction of the ray
+	double	dir_x;  //X coordinate of the ray, direction = player direction + plane * camera
+	double	dir_y;  //same deal but for Y coordinate
+	int		map_x;  //int of the player current X coordinate (used to represent the current GRID of the map the player is on, hence the integer)
+	int		map_y;  //same deal but for Y coordinate
+	int		step_x; //Will indicate the direction we're stepping, if it's a negative X direction, it will be -1, positive will be 1
+	int		step_y; //same deal but for Y direction
+	double 	perp_dist; //used to calculate the lenght of the ray(from it's starting position until it hits a wall)
+	double	side_dist_x; //distance the ray has to travel from it's starting position to hit closest X side
+	double	side_dist_y; //same deal but for Y
+	double	delta_dist_x; //distance the ray has to travel to go from one X side to the next
+	double	delta_dist_y; //same deal but for Y
+	double	wall_x; //exact point wall hit
+	int		tex_x;  //coordinate X of the texture
+	int		tex_y;
+	double	step; //how much to increase the texture coordinate per screen pixel
+	int		side; //used to indicate what type of wall we hit (N/S OR E/W)
 	int		line_height;
 	int		draw_start;
 	int		draw_end;
@@ -191,7 +193,8 @@ void init_ray_step(t_game *game, t_ray *ray);
 void dda_loop(t_game *game, t_ray *ray);
 void	set_perp_dist(t_ray *ray);
 void dda(t_game *game, t_ray *ray);
-
+void draw_line_distance(t_ray *ray);
+double get_texture_position(t_game *game, t_ray *ray, t_img *tex);
 
 
 #endif
