@@ -2,13 +2,13 @@
 
 int check_file(char *path)
 {
-    int fd;
+	int fd;
 
-    fd = open(path, O_RDONLY);
-    if (fd < 0)
-        return (error("cannot open file"));
-    close(fd);
-    return (0);
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+		return (error("cannot open file"));
+	close(fd);
+	return (0);
 }
 
 int check_extension(char *path)
