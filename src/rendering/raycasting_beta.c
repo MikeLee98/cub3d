@@ -20,7 +20,6 @@ void my_mlx_pixel_put(t_img *img, int x, int y, int color)
     *(unsigned int *)dst = color;
 }
 
-
 t_img *get_wall_texture(t_game *data, t_ray *ray)
 {
     if (ray->side == 0)

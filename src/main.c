@@ -53,7 +53,7 @@ int main(int argc, char **argv)
     mlx_loop_hook(game.mlx, loop, &game);
     mlx_loop(game.mlx);
 
-    
+//    free_mlx(&game);
 
     return (0);
 }

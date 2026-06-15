@@ -33,7 +33,7 @@
 # define RIGHT_ARR	65363
 
 // Movement
-# define MOVE_SPEED	0.05
+# define MOVE_SPEED	0.1
 # define ROT_SPEED	0.03
 
 // Structs
@@ -196,5 +196,6 @@ void dda(t_game *game, t_ray *ray);
 void draw_line_distance(t_ray *ray);
 double get_texture_position(t_game *game, t_ray *ray, t_img *tex);
 
+void	free_mlx(t_game *game);
 
 #endif

@@ -134,8 +134,11 @@ void rotate(t_game *game, double angle)
 
 int key_press(int keycode, t_game *game)
 {
-    if (keycode == ESC) 
+    if (keycode == ESC)
+    {
+        free_mlx(game);
         exit(0);
+    }
     if (keycode == 'w')
         move_forward(game);
     if (keycode == 's')

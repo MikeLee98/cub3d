@@ -1,6 +1,6 @@
 NAME = cub3d
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror 
 SRCDIR = src
 INCDIR = inc
 LIBFTDIR = libft
@@ -15,7 +15,7 @@ SRC = $(SRCDIR)/main.c \
 	$(SRCDIR)/rendering/raycasting_beta.c \
 	$(SRCDIR)/rendering/raycasting_delta.c \
 	$(SRCDIR)/rendering/raycasting_dda.c \
-	$(SRCDIR)/execution/init_textures.c \
+	$(SRCDIR)/rendering/init_textures.c \
 	$(SRCDIR)/player/movement.c \
 	$(SRCDIR)/parsing/main.c \
 	$(SRCDIR)/parsing/helper.c \
@@ -26,10 +26,7 @@ SRC = $(SRCDIR)/main.c \
 	$(SRCDIR)/parsing/validation.c \
 	$(SRCDIR)/parsing/parse_map.c \
 	$(SRCDIR)/parsing/validate_map.c \
-
-
-
-
+	$(SRCDIR)/helper/helper.c \
 
 OBJ = $(SRC:.c=.o)
 INC = -I$(INCDIR) -I$(LIBFTDIR) -I$(MLX_DIR)
