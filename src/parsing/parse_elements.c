@@ -52,7 +52,7 @@ int	parse_elements(t_game *game)
 		i++;
 	}
 	if (validate_values(game))
-		return (error("missing element"), 1);
+		return (1);
 	game->map.start_index = i;
 	return (0);
 }

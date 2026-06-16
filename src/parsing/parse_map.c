@@ -1,6 +1,6 @@
 #include "../../inc/cub3d.h"
 
-int parse_map(t_map *map)
+int parse_map(t_map *map, t_game *game)
 {
 	int i;
 	int j;
@@ -11,7 +11,7 @@ int parse_map(t_map *map)
 	map->height = map->height - map->start_index;
 	map->grid = ft_calloc(map->height + 1, sizeof(char *));
 	if (!map->grid)
-		return (1);
+		return (free_parsing(game), 1);
 	while (map->lines[i])
 	{
 		if (j < (int)ft_strlen(map->lines[i]))
@@ -24,7 +24,7 @@ int parse_map(t_map *map)
 	{
 		map->grid[i] = ft_calloc(map->width + 1, sizeof(char));
 		if (!map->grid[i])
-			return(1);
+			return (free_parsing(game), 1);
 		len = ft_strlen(map->lines[map->start_index + i]);
 		ft_memcpy(map->grid[i], map->lines[map->start_index + i], len);
 		ft_memset(map->grid[i] + len, ' ', map->width - len);

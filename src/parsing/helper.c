@@ -14,9 +14,10 @@ void    *ft_realloc(void *ptr, size_t old_size, size_t new_size)
     return (new);
 }
 
-int error(char *message)
+int error(char *message, t_game *game)
 {
     ft_printf("Error\n%s\n", message);
+	free_parsing(game);
     return (1);
 }
 
@@ -33,7 +34,7 @@ char **copy_grid(t_map *map)
     {
         copy[i] = ft_strdup(map->grid[i]);
         if (!copy[i])
-            return (NULL);
+            return (free_split(copy), NULL);
         i++;
     }
     return (copy);

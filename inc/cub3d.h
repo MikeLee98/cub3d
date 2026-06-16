@@ -155,17 +155,17 @@ int parse(t_game *game, char *path);
 
 // helper.c
 void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);
-int error(char *message);
+int error(char *message, t_game *game);
 char **copy_grid(t_map *map);
 void free_split(char **split);
 
 // check_extension.c
-int check_file(char *path);
-int check_extension(char *path);
+int check_file(char *path, t_game *game);
+int check_extension(char *path, t_game *game);
 
 // read_file.c
 char **read_lines(t_map *map, int fd);
-int read_file(t_map *map, char *path);
+int read_file(t_map *map, char *path, t_game *game);
 
 // parse_elements.c
 int check_colors(t_game *game, char *trimmed);
@@ -176,10 +176,10 @@ int parse_elements(t_game *game);
 int validate_values(t_game *game);
 
 // parse_map.c
-int parse_map(t_map *map);
+int parse_map(t_map *map, t_game *game);
 
 // validate_map.c
-int validate_map(t_map *map);
+int validate_map(t_map *map, t_game *game);
 
 
 //testing
@@ -197,5 +197,7 @@ void draw_line_distance(t_ray *ray);
 double get_texture_position(t_game *game, t_ray *ray, t_img *tex);
 
 void	free_mlx(t_game *game);
+void	free_parsing(t_game *game);
+void	free_game(t_game *game);
 
 #endif

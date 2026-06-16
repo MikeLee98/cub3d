@@ -19,16 +19,16 @@ char **read_lines(t_map *map, int fd)
 	return (lines);
 }
 
-int read_file(t_map *map, char *path)
+int read_file(t_map *map, char *path, t_game *game)
 {
 	int fd;
 
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
-		return (error("cannot open file"));
+		return (error("cannot open file", game), 1);
 	map->lines = read_lines(map, fd);
 	close(fd);
 	if (!map->lines)
-		return (error("failed to read file")); //close fd em todas as situaçoes inc error
+		return (error("failed to read file", game), 1); //close fd em todas as situaçoes inc error
 	return (0);
 }

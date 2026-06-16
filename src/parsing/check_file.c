@@ -1,22 +1,22 @@
 #include "../../inc/cub3d.h"
 
-int check_file(char *path)
+int check_file(char *path, t_game *game)
 {
     int fd;
 
     fd = open(path, O_RDONLY);
     if (fd < 0)
-        return (error("cannot open file"));
+        return (error("cannot open file", game), 1);
     close(fd);
     return (0);
 }
 
-int check_extension(char *path)
+int check_extension(char *path, t_game *game)
 {
     size_t	len;
 
 	len = ft_strlen(path);
 	if (len <= 4 || ft_strncmp(path + len - 4, ".cub", 4) != 0)
-		return (1);
+		return (error("invalid file extension", game), 1);
 	return (0);
 }

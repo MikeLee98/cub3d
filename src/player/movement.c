@@ -136,7 +136,7 @@ int key_press(int keycode, t_game *game)
 {
     if (keycode == ESC)
     {
-        free_mlx(game);
+        free_game(game);
         exit(0);
     }
     if (keycode == 'w')
