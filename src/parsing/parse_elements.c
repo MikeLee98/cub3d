@@ -18,7 +18,6 @@ static int	set_value(char **field, char *str)
 		return (1);
 	*field = ft_strdup(str);
 	// *field = ft_strtrim(*field, " \t\n");
-	printf("Setting value for %s: %s\n", *field, str);
 	return (!*field);
 }
 

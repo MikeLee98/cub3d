@@ -1,7 +1,7 @@
 NO ./textures/no_texture.xpm
 SO ./textures/so_texture.xpm
 WE ./textures/we_texture.xpm
-EA ./textures/ea_texture3.xpm   
+EA     ./textures/ea_texture.xpm   
 
 F 200,200,200
 C 100,100,100
@@ -12,7 +12,7 @@ C 100,100,100
   10N0001 
  1000001 
 111111111
-       
+
 1111
 1001
 1111
