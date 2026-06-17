@@ -32,7 +32,7 @@ int	load_textures(t_game *game)
 		|| load_one_texture(game, &t->so, t->path_so)
 		|| load_one_texture(game, &t->we, t->path_we)
 		|| load_one_texture(game, &t->ea, t->path_ea))
-		return (error("failed to load texture", game), 1);
+		return (1);
 	t->floor_color = t->f[0] << 16 | t->f[1] << 8 | t->f[2];
 	t->ceiling_color = t->c[0] << 16 | t->c[1] << 8 | t->c[2];
 	return (0);
