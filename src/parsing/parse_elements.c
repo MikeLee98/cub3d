@@ -40,7 +40,7 @@ int	parse_elements(t_game *game)
 	{
 		line = ft_strtrim(game->map.lines[i], " \t\n");
 		if (!line)
-			return (1);
+			return (free_parsing(game), 1);
 		if (line[0] == '\0')
 		{
 			free(line);

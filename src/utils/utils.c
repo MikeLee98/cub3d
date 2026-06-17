@@ -46,3 +46,9 @@ void free_game(t_game *game)
 	free_parsing(game);
 	free_mlx(game);
 }
+
+int	close_window(t_game *game)
+{
+	free_game(game);
+	exit(0);
+}

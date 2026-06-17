@@ -199,5 +199,6 @@ double get_texture_position(t_game *game, t_ray *ray, t_img *tex);
 void	free_mlx(t_game *game);
 void	free_parsing(t_game *game);
 void	free_game(t_game *game);
+int		close_window(t_game *game);
 
 #endif

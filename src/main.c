@@ -4,10 +4,10 @@ int init_game(t_game *game)
 {
 	game->mlx = mlx_init();
 	if (!game->mlx)
-		return (error("mlx init failed", game), 1);
+		return (free_game(game), 1);
 	game->win = mlx_new_window(game->mlx, 1280, 720, "cub3D");
 	if (!game->win)
-		return (error("window creation failed", game), 1);
+		return (free_game(game), 1);
     
     init_image(&game->screen);
     init_player(&game->player);
@@ -15,7 +15,7 @@ int init_game(t_game *game)
 
   
 	if (load_textures(game))
-		return (1);
+		return (free_game(game), 1);
 
 	return (0);
 }
@@ -50,6 +50,7 @@ int main(int argc, char **argv)
 
    
     mlx_hook(game.win, 2, 1L << 0, key_press, &game);
+	mlx_hook(game.win, 17, 0, close_window, &game);
     mlx_loop_hook(game.mlx, loop, &game);
     mlx_loop(game.mlx);
 
