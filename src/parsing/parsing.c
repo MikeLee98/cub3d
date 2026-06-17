@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mario <mario@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/17 12:46:41 by mario             #+#    #+#             */
+/*   Updated: 2026/06/17 12:59:42 by mario            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../inc/cub3d.h"
 
-int parse(t_game *game, char *path)
+int	parse(t_game *game, char *path)
 {
 	if (check_extension(path, game) || check_file(path, game))
 		return (1);

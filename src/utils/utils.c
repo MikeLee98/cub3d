@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mario <mario@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/17 12:47:36 by mario             #+#    #+#             */
+/*   Updated: 2026/06/17 13:55:18 by mario            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 void	free_mlx(t_game *game)
 {
 	if (!game->mlx)
-		return;
+		return ;
 	if (game->textures.no.img)
 		mlx_destroy_image(game->mlx, game->textures.no.img);
 	if (game->textures.so.img)
@@ -22,7 +34,7 @@ void	free_mlx(t_game *game)
 void	free_parsing(t_game *game)
 {
 	if (!game)
-		return;
+		return ;
 	if (game->map.lines)
 		free_split(game->map.lines);
 	if (game->map.grid)
@@ -41,7 +53,7 @@ void	free_parsing(t_game *game)
 		free(game->textures.path_ea);
 }
 
-void free_game(t_game *game)
+void	free_game(t_game *game)
 {
 	free_parsing(game);
 	free_mlx(game);

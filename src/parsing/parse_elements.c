@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_elements.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mario <mario@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/17 12:46:30 by mario             #+#    #+#             */
+/*   Updated: 2026/06/17 13:02:55 by mario            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../inc/cub3d.h"
 
 static int	set_value(char **field, char *str)
@@ -8,9 +20,9 @@ static int	set_value(char **field, char *str)
 	return (!*field);
 }
 
-int parse_element(t_game *game, char *str)
+static int	parse_element(t_game *game, char *str)
 {
-	int ret;
+	int	ret;
 
 	ret = 0;
 	if (!ft_strncmp(str, "NO ", 3))
@@ -33,7 +45,7 @@ int parse_element(t_game *game, char *str)
 int	parse_elements(t_game *game)
 {
 	int		i;
-	char 	*line;
+	char	*line;
 
 	i = 0;
 	while (game->map.lines[i])
@@ -45,10 +57,10 @@ int	parse_elements(t_game *game)
 		{
 			free(line);
 			i++;
-			continue;
+			continue ;
 		}
 		if (parse_element(game, line))
-    		break ;
+			break ;
 		i++;
 	}
 	if (validate_values(game))

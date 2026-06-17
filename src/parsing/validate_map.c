@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validate_map.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mario <mario@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/17 12:46:51 by mario             #+#    #+#             */
+/*   Updated: 2026/06/17 13:08:54 by mario            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../inc/cub3d.h"
 
-int validate_walls(t_map *map, t_game *game)
+static int	validate_walls(t_map *map, t_game *game)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (i < map->height)
@@ -27,11 +39,24 @@ int validate_walls(t_map *map, t_game *game)
 	return (0);
 }
 
-int validate_characters(t_map *map, t_game *game)
+static int	check_cell(t_map *map, int i, int j, int *player_count)
 {
-	int i;
-	int j;
-	int player_count;
+	if (ft_strchr("NSEW", map->grid[i][j]))
+	{
+		(*player_count)++;
+		map->player_y = i;
+		map->player_x = j;
+	}
+	else if (!ft_strchr("01 NSEW", map->grid[i][j]))
+		return (1);
+	return (0);
+}
+
+static int	validate_characters(t_map *map, t_game *game)
+{
+	int	i;
+	int	j;
+	int	player_count;
 
 	player_count = 0;
 	i = 0;
@@ -40,13 +65,7 @@ int validate_characters(t_map *map, t_game *game)
 		j = 0;
 		while (j < map->width)
 		{
-			if (ft_strchr("NSEW", map->grid[i][j]))
-			{
-				player_count++;
-				map->player_y = i;
-				map->player_x = j;
-			}
-			else if (!ft_strchr("01 NSEW", map->grid[i][j]))
+			if (check_cell(map, i, j, &player_count))
 				return (error("invalid character in map", game), 1);
 			j++;
 		}
@@ -57,7 +76,7 @@ int validate_characters(t_map *map, t_game *game)
 	return (0);
 }
 
-int validate_map(t_map *map, t_game *game)
+int	validate_map(t_map *map, t_game *game)
 {
 	if (validate_characters(map, game))
 		return (1);
