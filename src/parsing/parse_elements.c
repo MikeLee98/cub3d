@@ -6,19 +6,24 @@
 /*   By: mario <mario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/17 12:46:30 by mario             #+#    #+#             */
-/*   Updated: 2026/06/17 13:02:55 by mario            ###   ########.fr       */
+/*   Updated: 2026/06/17 19:27:05 by mario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
 
-static int	set_value(char **field, char *str)
+static int set_value(char **field, char *str)
 {
-	if (*field)
-		return (1);
-	*field = ft_strdup(str);
-	// *field = ft_strtrim(*field, " \t\n");
-	return (!*field);
+    char *tmp;
+
+    if (*field)
+        return (1);
+    tmp = ft_strdup(str);
+    if (!tmp)
+        return (1);
+    *field = ft_strtrim(tmp, " \t\n");
+    free(tmp);
+    return (!*field);
 }
 
 static int	parse_element(t_game *game, char *str)

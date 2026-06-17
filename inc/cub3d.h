@@ -6,7 +6,7 @@
 /*   By: mario <mario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/17 12:26:39 by mario             #+#    #+#             */
-/*   Updated: 2026/06/17 14:08:18 by mario            ###   ########.fr       */
+/*   Updated: 2026/06/17 19:21:22 by mario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@
 
 // Structs
 
-// esta estrutura e para tratar das imagens e renderizaçao
 typedef struct s_img
 {
 	void	*img;
@@ -62,7 +61,6 @@ typedef struct s_img
 	int		height;
 }	t_img;
 
-// esta estrutura e para tratar das texturas e cores
 typedef struct s_textures
 {
 	t_img		no;
@@ -81,7 +79,6 @@ typedef struct s_textures
 	char		*path_ea;
 }	t_textures;
 
-// esta estrutura trata da posiçao e orientaçao do jogador
 typedef struct s_player
 {
 	double		x;
@@ -116,7 +113,6 @@ typedef struct s_ray
 	int		draw_end;
 }	t_ray;
 
-// esta estrutura trata do mapa
 typedef struct s_map
 {
 	char	**lines;
@@ -128,7 +124,7 @@ typedef struct s_map
 	int		player_y;
 }	t_map;
 
-// master struct, conseguimos aceder a todas as outras a partir desta
+// master struct
 typedef struct s_game
 {
 	void		*mlx;
