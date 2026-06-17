@@ -1,10 +1,10 @@
 NO ./textures/no_texture.xpm
 SO ./textures/so_texture.xpm
 WE ./textures/we_texture.xpm
-EA     ./textures/ea_texture.xpm   
+EA ./textures/ea_texture.xpm   
 
-F 200,200,200
-C 100,100,100
+F 200,0,0
+C 0,150,200
 
   1111111
   10000001
