@@ -6,7 +6,7 @@
 /*   By: mario <mario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/17 12:26:39 by mario             #+#    #+#             */
-/*   Updated: 2026/06/17 21:18:18 by mario            ###   ########.fr       */
+/*   Updated: 2026/06/17 22:26:45 by mario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,7 @@ void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);
 int		error(char *message, t_game *game);
 char	**copy_grid(t_map *map);
 void	free_split(char **split);
+int		color_error(char **split, t_game *game);
 
 // check_extension.c
 int		check_file(char *path, t_game *game);
@@ -186,6 +187,9 @@ int		parse_map(t_map *map, t_game *game);
 
 // validate_map.c
 int		validate_map(t_map *map, t_game *game);
+
+// flood_fill.c
+int		validate_connected(t_map *map, t_game *game);
 
 //testing
 int		load_textures(t_game *game);

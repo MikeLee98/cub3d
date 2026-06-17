@@ -6,7 +6,7 @@
 /*   By: mario <mario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/17 12:46:20 by mario             #+#    #+#             */
-/*   Updated: 2026/06/17 21:18:24 by mario            ###   ########.fr       */
+/*   Updated: 2026/06/17 22:26:35 by mario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,11 @@ void	free_split(char **split)
 	while (split[i])
 		free(split[i++]);
 	free(split);
+}
+
+int	color_error(char **split, t_game *game)
+{
+	free_split(split);
+	error("color not RGB format", game);
+	return (1);
 }

@@ -6,73 +6,66 @@
 /*   By: mario <mario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/17 12:46:57 by mario             #+#    #+#             */
-/*   Updated: 2026/06/17 21:29:45 by mario            ###   ########.fr       */
+/*   Updated: 2026/06/17 22:26:55 by mario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
 
-static int count_commas(char *str)
+static int	count_commas(char *str)
 {
-    int count;
-    int i;
+	int	count;
+	int	i;
 
-    count = 0;
-    i = 0;
-    while (str[i])
-    {
-        if (str[i] == ',')
-            count++;
-        i++;
-    }
-    return (count);
+	count = 0;
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == ',')
+			count++;
+		i++;
+	}
+	return (count);
 }
 
-static int is_all_digits(char *str)
+static int	is_all_digits(char *str)
 {
-    int i;
+	int	i;
 
-    if (!str[0])
-        return (0);
-    i = 0;
-    while (str[i])
-    {
-        if (!ft_isdigit(str[i]))
-            return (0);
-        i++;
-    }
-    return (1);
+	if (!str[0])
+		return (0);
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
-static int color_error(char **split, t_game *game)
+static int	validate_color(char *str, int color[3], t_game *game)
 {
-    free_split(split);
-    error("color not RGB format", game);
-    return (1);
-}
+	char	**split;
+	int		i;
 
-static int validate_color(char *str, int color[3], t_game *game)
-{
-    char    **split;
-    int     i;
-
-    if (count_commas(str) != 2)
-    {
-        error("color not RGB format", game);
-        return (1);
-    }
-    split = ft_split(str, ',');
-    if (!split)
-        return (1);
-    if (!split[0] || !split[1] || !split[2] || split[3])
-        return (color_error(split, game));
-    i = 0;
-    while (i < 3)
-    {
-        if (!is_all_digits(split[i]))
-            return (color_error(split, game));
-        color[i] = ft_atoi(split[i]);
-        if (color[i] > 255)
+	if (count_commas(str) != 2)
+	{
+		error("color not RGB format", game);
+		return (1);
+	}
+	split = ft_split(str, ',');
+	if (!split)
+		return (1);
+	if (!split[0] || !split[1] || !split[2] || split[3])
+		return (color_error(split, game));
+	i = 0;
+	while (i < 3)
+	{
+		if (!is_all_digits(split[i]))
+			return (color_error(split, game));
+		color[i] = ft_atoi(split[i]);
+		if (color[i] > 255)
 			return (color_error(split, game));
 		i++;
 	}

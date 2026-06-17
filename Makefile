@@ -28,6 +28,7 @@ SRC = $(SRCDIR)/main.c \
 	$(SRCDIR)/parsing/validation.c \
 	$(SRCDIR)/parsing/parse_map.c \
 	$(SRCDIR)/parsing/validate_map.c \
+	$(SRCDIR)/parsing/flood_fill.c \
 	$(SRCDIR)/utils/utils.c \
 
 OBJ = $(SRC:.c=.o)

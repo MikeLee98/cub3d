@@ -6,7 +6,7 @@
 /*   By: mario <mario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/17 12:46:51 by mario             #+#    #+#             */
-/*   Updated: 2026/06/17 13:08:54 by mario            ###   ########.fr       */
+/*   Updated: 2026/06/17 22:20:11 by mario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ int	validate_map(t_map *map, t_game *game)
 	if (validate_characters(map, game))
 		return (1);
 	if (validate_walls(map, game))
+		return (1);
+	if (validate_connected(map, game))
 		return (1);
 	return (0);
 }
